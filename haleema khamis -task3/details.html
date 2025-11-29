@@ -1,0 +1,82 @@
+<!-- Week Details Page --> 
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title -->
+    <title>Week Details</title>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Week 1: Introduction to HTML</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Weekly Information -->
+        <article>
+            <p><strong>Starts on:</strong> 2025-01-10</p>
+
+            <h2>Description & Notes</h2>
+            <p>
+                This week covers the basics of HTML structure, tags, and how web pages are built.
+                You will learn about elements, nesting, attributes, and semantic layout.
+            </p>
+
+            <h2>Exercises & Resources</h2>
+            <ul>
+                <li><a href="#">Exercise 1 - Basic HTML Tags</a></li>
+                <li><a href="#">Exercise 2 - Creating Your First Webpage</a></li>
+                <li><a href="#">Resource: HTML Cheat Sheet</a></li>
+            </ul>
+        </article>
+
+        <!-- Discussion Forum -->
+        <section id="discussion-forum">
+            <h2>Discussion</h2>
+
+            <!-- Existing Comments -->
+            <div id="comments-container">
+
+                <!-- Comment 1 -->
+                <article class="comment">
+                    <p>I have a question about the &lt;header&gt; tag. When should we use it?</p>
+                    <footer>Posted by: John Doe</footer>
+                </article>
+
+                <!-- Comment 2 -->
+                <article class="comment">
+                    <p>The exercises were very helpful. Thank you!</p>
+                    <footer>Posted by: Sarah Ahmed</footer>
+                </article>
+
+            </div>
+
+            <!-- Add Comment Form -->
+            <form id="comment-form" action="#">
+                <fieldset>
+                    <legend>Ask a Question</legend>
+
+                    <label for="new-comment">Your Comment:</label>
+                    <textarea id="new-comment" rows="4" required></textarea>
+
+                    <button type="submit">Post Comment</button>
+                </fieldset>
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

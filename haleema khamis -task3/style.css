@@ -1,0 +1,41 @@
+/* CSS Styles  done by haleema khamis 202104099*/
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* ------------------------------
+   Header
+--------------------------------*/
+header {
+    background-color: #003366;
+    color: white;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 4px solid #004c99;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+/* ------------------------------
+   Main Container
+--------------------------------*/
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* ------------------------------
+   Navigation Section
+--------------------------------*/
+nav {
+    background: white;
+    padding: 20px;
+    border-radius: 10 }
