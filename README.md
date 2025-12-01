@@ -3,9 +3,11 @@
 # ITCS### Course Page
 
 ## The names and student IDs of all team members.
+ITCSS333 SEC2 GROUP 2
+1- haleema khamis ali 202104099 task 3
+2-Fatima Mohammed Baqer Jahrami 202103345 Task 1
 
 ## A table indicating which student was responsible for which task.
 
 ## A link to your live, hosted application on Replit.
-ITCSS333 SEC2 GROUP 2
-1- haleema khamis ali 202104099 task 3
+
