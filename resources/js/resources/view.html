@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Details - ITCS333</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    
+    <style>
+        .comment {
+            border-left: 3px solid #4CAF50;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: #f8f9fa;
+        }
+        .attachment {
+            background: #e9ecef;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>Resource Details</strong></li>
+        </ul>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="index.html">Resources</a></li>
+            <li><a href="../courses.html">Weekly</a></li>
+            <li><a href="../login.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <article>
+            <header>
+                <h1>HTML5 Fundamentals</h1>
+                <p><strong>Type:</strong> <span style="background:#4CAF50; color:white; padding:2px 8px; border-radius:3px;">Lecture Notes</span></p>
+                <p><strong>Week:</strong> 1 • <strong>Posted:</strong> October 15, 2025 • <strong>Author:</strong> Dr. Smith</p>
+            </header>
+            
+            <section>
+                <h2>Description</h2>
+                <p>This resource covers the fundamentals of HTML5 including semantic elements, forms, multimedia, and basic page structure.</p>
+                
+                <h3>Topics Covered:</h3>
+                <ul>
+                    <li>HTML5 Semantic Elements (header, nav, section, article, footer)</li>
+                    <li>Forms and Input Types</li>
+                    <li>Audio and Video Elements</li>
+                    <li>Canvas and SVG Basics</li>
+                    <li>Accessibility Features</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Attachments</h2>
+                <div class="attachment">
+                    <strong>html5_basics.pdf</strong> (2.4 MB)
+                    <a href="#" style="float:right">Download</a>
+                </div>
+                <div class="attachment">
+                    <strong>examples.zip</strong> (1.1 MB)
+                    <a href="#" style="float:right">Download</a>
+                </div>
+            </section>
+            
+            <section id="comments">
+                <h2>Discussion Comments</h2>
+                
+                <div class="comment">
+                    <p><strong>Ahmed Al-Mansoori</strong></p>
+                    <p>Very helpful for understanding semantic HTML!</p>
+                    <small>October 16, 2025</small>
+                </div>
+                
+                <div class="comment">
+                    <p><strong>Dr. Smith</strong></p>
+                    <p>Remember to practice with the exercises to reinforce learning.</p>
+                    <small>October 17, 2025</small>
+                </div>
+                
+                <!-- Add Comment Form -->
+                <form onsubmit="postComment(event)">
+                    <textarea id="newComment" placeholder="Add your comment or question..." 
+                              rows="3" required></textarea>
+                    <button type="submit">Post Comment</button>
+                </form>
+            </section>
+        </article>
+        
+        <div style="margin-top: 2rem;">
+            <a href="index.html" role="button" class="secondary">← Back to Resources</a>
+        </div>
+    </main>
+
+    <script>
+        function postComment(event) {
+            event.preventDefault();
+            const commentText = document.getElementById('newComment').value.trim();
+            
+            if (!commentText) {
+                alert('Please enter a comment');
+                return;
+            }
+            
+            const commentsSection = document.getElementById('comments');
+            const newComment = document.createElement('div');
+            newComment.className = 'comment';
+            newComment.innerHTML = `
+                <p><strong>You</strong></p>
+                <p>${commentText}</p>
+                <small>Just now</small>
+            `;
+            
+            commentsSection.insertBefore(newComment, commentsSection.querySelector('form'));
+            document.getElementById('newComment').value = '';
+            alert('Comment posted successfully!');
+        }
+    </script>
+</body>
+</html>
