@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Resources - ITCS333</title>
+    
+    <!-- Pico.css - نفس اللي في login.html -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    
+    <style>
+        .resource-card {
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+        }
+        .resource-type {
+            background: #4CAF50;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        .search-filter {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .search-filter input {
+            flex: 1;
+        }
+        .comments-badge {
+            background: #6c757d;
+            color: white;
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation - نفس أسلوب login.html -->
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>Course Resources</strong></li>
+        </ul>
+        <ul>
+            <!-- روابط مؤكدة -->
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="index.html" class="secondary">Resources</a></li>
+            <li><a href="../courses.html">Weekly</a></li>
+            <li><a href="../login.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <h1>📚 Course Resources</h1>
+        <p>Access all learning materials for ITCS333 course</p>
+        
+        <!-- Search and Filter -->
+        <div class="search-filter">
+            <input type="text" id="searchInput" placeholder="Search resources..." aria-label="Search">
+            <select id="typeFilter">
+                <option value="all">All Types</option>
+                <option value="lecture">Lecture Notes</option>
+                <option value="book">Book Chapters</option>
+                <option value="video">Video Tutorials</option>
+                <option value="link">Useful Links</option>
+            </select>
+        </div>
+        
+        <!-- Resources Container -->
+        <div id="resourcesContainer">
+            <!-- Resource 1 -->
+            <article class="resource-card">
+                <header>
+                    <hgroup>
+                        <h3>HTML5 Fundamentals</h3>
+                        <p><span class="resource-type">Lecture Notes</span> • Week 1</p>
+                    </hgroup>
+                </header>
+                <p>Introduction to HTML5 semantic elements, forms, and multimedia features.</p>
+                <footer>
+                    <small>Posted: October 15, 2025 | Author: Dr. Smith</small><br>
+                    <a href="view.html?id=1" role="button" class="outline">View Details</a>
+                    <a href="view.html?id=1#comments" role="button" class="secondary">
+                        Comments <span class="comments-badge">3</span>
+                    </a>
+                </footer>
+            </article>
+            
+            <!-- Resource 2 -->
+            <article class="resource-card">
+                <header>
+                    <hgroup>
+                        <h3>CSS Layout Techniques</h3>
+                        <p><span class="resource-type" style="background:#2196F3;">Video Tutorial</span> • Week 2</p>
+                    </hgroup>
+                </header>
+                <p>Learn CSS Flexbox, Grid, and responsive design principles.</p>
+                <footer>
+                    <small>Posted: October 18, 2025 | Author: Dr. Smith</small><br>
+                    <a href="view.html?id=2" role="button" class="outline">View Details</a>
+                    <a href="view.html?id=2#comments" role="button" class="secondary">
+                        Comments <span class="comments-badge">5</span>
+                    </a>
+                </footer>
+            </article>
+            
+            <!-- Resource 3 -->
+            <article class="resource-card">
+                <header>
+                    <hgroup>
+                        <h3>JavaScript ES6+ Features</h3>
+                        <p><span class="resource-type" style="background:#FF9800;">Book Chapter</span> • Week 3</p>
+                    </hgroup>
+                </header>
+                <p>Modern JavaScript features including arrow functions, promises, and modules.</p>
+                <footer>
+                    <small>Posted: October 20, 2025 | Author: Dr. Smith</small><br>
+                    <a href="view.html?id=3" role="button" class="outline">View Details</a>
+                    <a href="view.html?id=3#comments" role="button" class="secondary">
+                        Comments <span class="comments-badge">2</span>
+                    </a>
+                </footer>
+            </article>
+        </div>
+        
+        <!-- Admin Actions (يظهر فقط للمشرف) -->
+        <div style="margin-top: 2rem; text-align: center;">
+            <button onclick="addResource()" class="contrast">➕ Add New Resource</button>
+            <a href="admin.html" role="button" class="secondary">Manage Resources (Admin)</a>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="js/resources.js"></script>
+</body>
+</html>
