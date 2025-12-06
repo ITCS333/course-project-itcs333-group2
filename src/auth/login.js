@@ -1,107 +1,129 @@
 /*
-  Requirement: Add client-side validation to the login form.
+ * FINAL JSON VERSION: Reverts to using local students.json for login verification.
+ * This bypasses the database connection issue.
+ */
 
-  Instructions:
-  1. Link this file to your HTML using a <script> tag with the 'defer' attribute.
-     Example: <script src="login.js" defer></script>
-  
-  2. In your login.html, add a <div> element *after* the </fieldset> but
-     *before* the </form> closing tag. Give it an id="message-container".
-     This div will be used to display success or error messages.
-     Example: <div id="message-container"></div>
-  
-  3. Implement the JavaScript functionality as described in the TODO comments.
-*/
+// --- Global Variables ---
+let studentData = [];
 
 // --- Element Selections ---
-// We can safely select elements here because 'defer' guarantees
-// the HTML document is parsed before this script runs.
+const loginForm = document.getElementById('login-form');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const messageContainer = document.getElementById('message-container');
 
-// TODO: Select the login form. (You'll need to add id="login-form" to the <form> in your HTML).
+// --- Functions (Keep these the same) ---
 
-// TODO: Select the email input element by its ID.
-
-// TODO: Select the password input element by its ID.
-
-// TODO: Select the message container element by its ID.
-
-// --- Functions ---
-
-/**
- * TODO: Implement the displayMessage function.
- * This function takes two arguments:
- * 1. message (string): The message to display.
- * 2. type (string): "success" or "error".
- *
- * It should:
- * 1. Set the text content of `messageContainer` to the `message`.
- * 2. Set the class name of `messageContainer` to `type`
- * (this will allow for CSS styling of 'success' and 'error' states).
- */
 function displayMessage(message, type) {
-  // ... your implementation here ...
+    if (!messageContainer) return;
+    messageContainer.textContent = message;
+    messageContainer.removeAttribute('data-theme');
+    messageContainer.classList.remove('success', 'error');
+
+    if (type === 'success') {
+        messageContainer.setAttribute('data-theme', 'success');
+        messageContainer.classList.add('success');
+    } else if (type === 'error') {
+        messageContainer.setAttribute('data-theme', 'danger');
+        messageContainer.classList.add('error');
+    }
 }
 
-/**
- * TODO: Implement the isValidEmail function.
- * This function takes one argument:
- * 1. email (string): The email string to validate.
- *
- * It should:
- * 1. Use a regular expression to check if the email format is valid.
- * 2. Return `true` if the email is valid (e.g., "test@example.com").
- * 3. Return `false` if the email is invalid (e.g., "test@", "test.com", "test@.com").
- *
- * A simple regex for this purpose is: /\S+@\S+\.\S+/
- */
 function isValidEmail(email) {
-  // ... your implementation here ...
+    const emailRegex = /\S+@\S+\.\S+/;
+    return emailRegex.test(email);
 }
 
-/**
- * TODO: Implement the isValidPassword function.
- * This function takes one argument:
- * 1. password (string): The password string to validate.
- *
- * It should:
- * 1. Check if the password length is 8 characters or more.
- * 2. Return `true` if the password is valid.
- * 3. Return `false` if the password is not valid.
- */
 function isValidPassword(password) {
-  // ... your implementation here ...
+    return password.length >= 8;
+}
+
+// ----------------------------------------------------------------------
+// 🔑 Reintroduced JSON Data Fetching
+// ----------------------------------------------------------------------
+
+async function fetchStudentData() {
+    try {
+        // CORRECT PATH for your structure: src/data/students.json
+        const response = await fetch('./src/data/students.json'); 
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        studentData = await response.json();
+        console.log("Student data loaded successfully.");
+        displayMessage("Data loaded successfully.", "success");
+    } catch (error) {
+        console.error("Could not fetch student data:", error);
+        displayMessage("Could not load student data. Please check the file path and JSON format.", "error");
+    }
 }
 
 /**
- * TODO: Implement the handleLogin function.
- * This function will be the event handler for the form's "submit" event.
- * It should:
- * 1. Prevent the form's default submission behavior.
- * 2. Get the `value` from `emailInput` and `passwordInput`, trimming any whitespace.
- * 3. Validate the email using `isValidEmail()`.
- * - If invalid, call `displayMessage("Invalid email format.", "error")` and stop.
- * 4. Validate the password using `isValidPassword()`.
- * - If invalid, call `displayMessage("Password must be at least 8 characters.", "error")` and stop.
- * 5. If both email and password are valid:
- * - Call `displayMessage("Login successful!", "success")`.
- * - (Optional) Clear the email and password input fields.
+ * Verifies the credentials against the loaded student data (ID is used as password).
  */
-function handleLogin(event) {
-  // ... your implementation here ...
+function verifyCredentials(email, password) {
+    const student = studentData.find(s => s.email.toLowerCase() === email.toLowerCase());
+
+    if (student) {
+        // Successful match if the stored ID equals the entered password
+        return student.id === password;
+    }
+    return false;
 }
 
-/**
- * TODO: Implement the setupLoginForm function.
- * This function will be called once to set up the form.
- * It should:
- * 1. Check if `loginForm` exists.
- * 2. If it exists, add a "submit" event listener to it.
- * 3. The event listener should call the `handleLogin` function.
- */
+
+// ----------------------------------------------------------------------
+// UPDATED handleLogin function for JSON lookup and redirection
+// ----------------------------------------------------------------------
+
+async function handleLogin(event) {
+    event.preventDefault();
+    displayMessage('', ''); 
+
+    // Check if data is loaded
+    if (studentData.length === 0) {
+        displayMessage("Data not loaded. Retrying fetch...", "error");
+        await fetchStudentData(); 
+        if (studentData.length === 0) {
+             displayMessage("Critical error: Student data is unavailable.", "error");
+             return;
+        }
+    }
+
+    // Get and Validate Inputs
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!isValidEmail(email)) { displayMessage("Invalid email format.", "error"); emailInput.focus(); return; }
+    if (!isValidPassword(password)) { displayMessage("Password must be at least 8 characters.", "error"); passwordInput.focus(); return; }
+
+    // Final verification and Redirection
+    if (verifyCredentials(email, password)) {
+        const student = studentData.find(s => s.email.toLowerCase() === email.toLowerCase());
+
+        displayMessage(`✅ Login successful! Welcome, ${student.name}. Redirecting...`, "success");
+
+        // Redirect to index.html (main page) after 1.5 seconds
+        setTimeout(() => {
+            window.location.href = 'index.html'; 
+        }, 1500); 
+
+    } else {
+        displayMessage("Login failed: Invalid email or password (ID).", "error");
+    }
+}
+
+// ----------------------------------------------------------------------
+// Initial setup
+// ----------------------------------------------------------------------
+
 function setupLoginForm() {
-  // ... your implementation here ...
+    // Load the student data when the page loads
+    fetchStudentData(); 
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLogin);
+    }
 }
 
-// --- Initial Page Load ---
-// Call the main setup function to attach the event listener.
 setupLoginForm();
