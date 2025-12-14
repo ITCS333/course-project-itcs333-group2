@@ -16,6 +16,8 @@ ITCSS333 SEC2 GROUP 2
 | :--- | :--- | :--- | :--- |
 | **Fatima Mohamed jahrami** | 202103345 | Task 1 (admin)(auth) | ✅ Done |
 | **** | |  |  |
+| **ghufran sameer yusuf** | 202008484 | Task 2 | ✅ Done |
+| **** | |  |  |
 | **haleema kahmis ali** | 202104099 | Task 3  | ✅ Done |
 | **** | |  |  |
 ## A link to your live, hosted application on Replit.
