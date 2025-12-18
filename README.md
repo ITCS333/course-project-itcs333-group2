@@ -12,6 +12,7 @@ ITCSS333 SEC2 GROUP 2
 ## A table indicating which student was responsible for which task.
 ### 📋 Team Member Task Assignments
 
+# Table
 | Name | ID | Task | Status |
 | :--- | :--- | :--- | :--- |
 | **Fatima Mohamed jahrami** | 202103345 | Task 1 (admin)(auth) | ✅ Done |
